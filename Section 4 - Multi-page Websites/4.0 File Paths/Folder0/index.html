@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Absolute vs Relative File Paths</title>
+    <link rel="shortcut icon" href="./Folder3/cat.png" type="image/x-icon" />
+  </head>
+  <body>
+    <!-- Absolute path: it starts from root directory like C drive then travserse to destination file/
+     project -->
+    <!-- Relative path: it starts from current directory and we can traverse up level or down or in current
+    really useful in web even when project folder moves somewhere the path will be valid  -->
+
+    <!-- In Relative path, ./ means search in current directory
+    ../ means move to up level like parent folder of project folder maybe 
+    -->
+
+    <h1>All the Animals</h1>
+    <h2>Rabbit:</h2>
+    <!-- since rabbit image is in current folder (folder 0) we use ./ notation -->
+    <img src="./rabbit.png" alt="Rabbit" height="200px" />
+
+    <h2>Cat:</h2>
+    <!-- we use ./ in this case bcz folder 3 is inside folder 0 which contains index file -->
+    <img src="./Folder3/cat.png" alt="Cat" height="200px" />
+
+    <h2>Dog:</h2>
+    <!-- we use ../ bcz dog image is present outside the Folder 0 -->
+    <img src="../dog.png" alt="Dog" height="200px" />
+
+    <h2>Fish:</h2>
+    <!-- we use ../ to get outside of Folder 0 and then move to Folder 1 which contains fish image -->
+    <img src="../Folder1/fish.png" alt="Fish" height="200px" />
+
+    <h2>Bird:</h2>
+    <!-- bird image is outside the folder 0 thats why we use ../ notation to get outside and the traverse
+    to folder 1 then folder 2 where bird image is present -->
+    <img src="../Folder1/Folder2/bird.png" alt="Bird" height="200px" />
+  </body>
+</html>

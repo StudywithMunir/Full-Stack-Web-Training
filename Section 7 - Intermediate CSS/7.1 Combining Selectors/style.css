@@ -1,0 +1,61 @@
+/* Write your code here: */
+
+/* Using Group selectors which apply the same styling on the group of elements/id or classes */
+h1,h2{
+    color: blueviolet;
+}
+
+/* Child selector (targets only direct child of parent to 1st level */
+/* e.g  <div>
+p tag
+
+ul
+li<p>li
+ul
+
+</div>
+*/
+/* It only targets the first p tag bcz it is the direct child */
+.box > p {
+    color: firebrick;
+}
+
+/* Descandant selector (targets the descandant means it can target the element deep in the container dosent matter
+how many levels 
+e.g,
+<div>
+p tag
+.box
+p tag
+.box
+</div>
+*/
+
+/* Both this approach works */
+/* .box .list{
+    color: blue;
+} */
+
+.box li {
+    color: blue;
+}
+
+/* Chaining Selector (Apply styling where all selectors are true in an element) */
+/* Syntax:
+tagclassid (with no space)
+*/
+li.done{
+    color: seagreen;
+}
+
+
+/* Combining Selector */
+/* we combined tag selector with chaining selector to change the font size of paragraph  */
+ul p.done{
+    font-size: 0.5rem;
+}
+
+
+/* Note:
+There many ways to target the element you want you can try any method that give the expected output
+*/

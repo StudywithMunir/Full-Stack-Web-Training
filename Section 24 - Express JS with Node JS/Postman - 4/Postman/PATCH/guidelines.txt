@@ -1,0 +1,3 @@
+In PUT request, we have to add fields related to the endpoint defined in DATABASE
+
+But in PATCH request, we can add one field or more related to endpoint defined in DATABASE

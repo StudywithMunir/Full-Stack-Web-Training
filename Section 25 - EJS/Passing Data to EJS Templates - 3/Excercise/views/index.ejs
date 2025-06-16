@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client To Server</title>
+  </head>
+  <body>
+    <!-- if numLetters variable exist then change heading 
+    mandatory to use locals bcz at first form data is empty so it throws Reference Error without locals 
+    -->
+    <% if(locals.numLetters){ %>
+    <h1>There are <%= numLetters %> letters in your name</h1>
+    <% } else { %>
+    <h1>Please Enter Your Name Below</h1>
+    <% } %>
+    <form action="/submit" method="post">
+      <label for="firstname">First Name</label>
+      <input type="text" name="fName" />
+      <label for="lastname">Last Name</label>
+      <input type="text" name="lName" />
+      <!-- use submit type button so dont have to control the button using js explicitly -->
+      <input type="submit" value="Send Data" />
+    </form>
+  </body>
+</html>

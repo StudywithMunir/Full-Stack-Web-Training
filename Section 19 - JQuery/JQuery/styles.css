@@ -1,0 +1,35 @@
+.heading {
+    margin-top: 100px;
+    text-align: center;
+    font-size: 4.5rem;
+    color: orangered;
+    font-weight: lighter;
+    font-style: italic;
+    /*horizontal vertical blur color*/
+}
+
+.font-shadow {
+    text-shadow: 2px 2px 8px #FF0000;
+}
+
+#faq-div {
+    width: 60%;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+}
+
+.faq-question {
+    background-color: #f0f0f0;
+    padding: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.faq-answer {
+    display: none;
+    padding: 10px;
+    background-color: #e0e0ff;
+    border-left: 4px solid #5555ff;
+    border-radius: 5px;
+}

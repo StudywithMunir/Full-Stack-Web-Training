@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EJS Tags</title>
+  </head>
+  <body>
+    <!-- renders the variable -->
+    <h1><%= title %></h1>
+    <p>Current seconds: <%= seconds %></p>
+    <ul>
+      <!-- help add js code -->
+      <% fruits.forEach(fruit => { %>
+      <li><%= fruit %></li>
+      <% }); %>
+    </ul>
+    <!-- renders html -->
+    <%- htmlContent %> <%- include('footer.ejs') %>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Sono", sans-serif;
+}
+
+html{
+    background-color: #d7dadac4;
+}
+
+.pricing-container {
+    display: flex;
+    height: 85vh;
+    gap: 30px;
+    justify-content: center;
+    margin-top: 30px;
+    /* border: 2px solid red; */
+}
+
+.pricing-plan {
+    display: flex;
+    flex-direction: column;
+    /* border: 2px solid blue; */
+    height: 90vh;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+}
+
+.upper-section {
+    /* border: 2px solid green; */
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    /* margin-bottom: 30px; */
+    height: 55vh;
+    gap: 10px;
+    padding-top: 20px;
+    border-radius: 10px 10px 0 0;
+}
+
+.membership {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.price {
+    position: relative;
+    margin-bottom: 15px;
+    text-align: center;
+    margin-right: 35px;
+}
+
+.price > span {
+    font-weight: bold;
+    font-size: 2rem;
+    margin-right: 50px;
+}
+
+.price > h2 {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-weight: lighter;
+    font-size: 3rem;
+}
+
+.months {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.price-btn {
+    height: 7vh;
+    width: 85%;
+    border: none;
+    background-color: #30574e;
+    border-radius: 10px;
+    color: white;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.duration {
+    margin-top: 30px;
+    font-size: 1rem;
+    font-weight: lighter;
+}
+
+.lower-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 30vh;
+    width: 100%;
+    background-color: #f4f6f6;
+    padding-top: 20px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.lower-section span {
+    color: #30574e;
+}
+
+.lower-section > p {
+    margin-left: 30px;
+    margin-top: 5px;
+    overflow-wrap: break-word;
+}
+
+/* 2nd item */
+.top-seller {
+    position: relative;
+}
+
+.t-seller {
+    background-color: #633761;
+    height: 6vh;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -5px;
+}
+
+.t-seller span {
+    color: white;
+}
+
+.top-seller .upper-section .price-btn {
+    background-color: #633761;
+}
+
+.top-seller .lower-section p > span {
+    color: #633761;
+}
+
+
+@media (max-width: 900px) {
+    .pricing-container {
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+    }
+  
+    .pricing-plan {
+      width: 90%;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    .t-seller {
+        top: -20px;
+    }
+  }
+
+@media (max-width: 1102px){
+    .t-seller {
+        width: 40%;
+        top: -15px;
+    }
+}
+  

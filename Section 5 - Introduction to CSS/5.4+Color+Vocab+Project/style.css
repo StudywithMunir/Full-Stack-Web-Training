@@ -1,0 +1,35 @@
+#red{
+    color: red;
+}
+
+#blue{
+    color: blue;
+}
+
+#orange{
+    color:orange;
+}
+
+#green{
+    color: green;
+}
+
+#yellow{
+    color: yellow;
+}
+
+.color-title{
+    font-weight: normal;
+}
+
+/* one way to style image */
+img{
+    height: 200px;
+    width: 200px;
+}
+
+/* second way to style image */
+/* img[src]{
+    height: 200px;
+    width: 200px;
+} */

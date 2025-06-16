@@ -1,0 +1,12 @@
+<%- include("partials/header") %>
+
+<h2>Edit Post</h2>
+<form action="/update/<%= post.id %>" method="POST">
+  <input name="title" value="<%= post.title %>" required />
+  <textarea name="content" required><%= post.content %></textarea>
+  <button type="submit">Update</button>
+</form>
+
+</main>
+</body>
+</html>

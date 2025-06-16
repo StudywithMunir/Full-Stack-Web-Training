@@ -1,0 +1,7 @@
+.huge {
+  font-size: 10rem;
+}
+
+.my-button:active {
+  color: red;
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CSS Positioning Exercise</title>
+    <style>
+      /* Write your code here */
+      .red-circle {
+        background-color: red;
+        height: 200px;
+        width: 200px;
+        /* makes perfect red circle */
+        border-radius: 50%;
+      }
+
+      .blue-box {
+        background-color: blue;
+        height: 300px;
+        width: 500px;
+        /* changing the box position without help of margins */
+        /* we use the relative so we can play with top/bottom/left/right and it is relative to original position */
+        position: relative;
+
+        /* moving 200px from top and left */
+        top: 200px;
+        left: 200px;
+      }
+
+      /* using chaining selector to target red-circle and setting absolute now red circle positioned relative to blue box */
+      div.red-circle {
+        position: absolute;
+        top: 150px;
+        left: 250px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="blue-box">
+      <div class="red-circle"></div>
+    </div>
+  </body>
+</html>

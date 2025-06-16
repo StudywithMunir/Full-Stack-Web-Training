@@ -1,0 +1,2 @@
+SERVER MUST BE RUNNING in Express JS (port should be on like 3000 on express) which you will add on the postman url
+choose url, request method(get...delete)

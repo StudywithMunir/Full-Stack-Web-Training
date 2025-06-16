@@ -1,0 +1,39 @@
+ol {
+  margin-left: -40px;
+  margin-top: -20px;
+  list-style-position: inside;
+}
+
+/* Write your CSS below, don't change the rules above. */
+
+/* use element selector carefully bcz it will target all p tags present on webpage use when you have only single tag
+on page like h1  */
+p{
+  color: red;
+}
+
+/* class selector is used to group tags like you can group tags which needs to style color:red and you can done it 
+by setting color-red as class for each tag */
+.note{
+  font-size: 20px;
+}
+
+/* id is unique selector use it when you want to do unique styling of section or tag */
+#id-selector-demo{
+  color: green;
+}
+
+/* attribute selector is used to target the attribute like href,src,type,value etc of an tag 
+e.g, li[value]{} //target all li with value attribute
+e.g, li[value="4"]{} target all li that has attribute of value and the value of attribute equals to 4
+*/
+li[value="4"]{
+  color: blue;
+}
+
+/* universal selector is used when you want to apply universal styling on the webpage 
+e.g, font-size:20; all elements/tags on webpage has font-size 20
+or you can text-align etc */
+*{
+  text-align: center;
+}

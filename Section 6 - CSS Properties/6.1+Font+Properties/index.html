@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Properties</title>
+    <style>
+      body {
+        background-color: cornflowerblue;
+        color: white;
+        font-size: 18px;
+      }
+
+      /* Don't change the CSS above, add Your CSS below */
+
+      /* Note:
+      Default font size for root element (html) is 16px
+      open inspect click on html tag and under
+      Computed > font-size 
+      it was calculated by browser
+      this will not applied directly to the elements on the webpage like we did with body selector
+      */
+
+      /* setting root element font size to 10px */
+      html {
+        /* font-size: 62.5%; equals to 10px
+        https://nekocalc.com/px-to-percentage-converter */
+
+        font-size: 20px;
+      }
+
+      /* overriding root element font size through body selector and setting all the elements default font size */
+      body {
+        background-color: cornflowerblue;
+        color: white;
+        font-size: 18px;
+      }
+
+      #color {
+        color: coral;
+      }
+
+      #font-size {
+        /* rem is relative to root element (html) */
+        /* 2rem is equals to 20px bcz root element is 10px (double the size of root according to 2rem)
+        1rem = 10px
+        */
+
+        /* now the computed font size will be double the size of root bcz root is 20px and we use 2rem which double the size */
+        font-size: 2rem;
+      }
+
+      #font-weight {
+        font-weight: 900;
+      }
+
+      #font-family {
+        font-family: "Caveat", cursive;
+      }
+
+      #text-align {
+        text-align: right;
+      }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <h1>Important CSS Properties</h1>
+    <p id="color">Color</p>
+    <p id="font-size">Font Size</p>
+    <p id="font-weight">Font Weight</p>
+    <p id="font-family">Font Family</p>
+    <p id="text-align">Text Align</p>
+
+    <!-- TODOs
+  1. Change the color of <p>Color</p> to "coral" color.
+  2. Change the font size of <p>Font Size</p> to 2X the size of the root font size.
+  3. Change the font weight of <p>Font Weight</p> to 900.
+  4. Change the font family of <p>Font Family</p> to the Google font Caveat with regular (400) font weight.
+  Link: https://fonts.google.com/specimen/Caveat
+  5. Change the <p>Text Align</p> to right align.
+  6. Change the the root (html element) font size to 30px -->
+  </body>
+</html>
