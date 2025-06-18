@@ -8,6 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PORT = 3000;
 
 app.set("view engine", "ejs");
+app.set("views",__dirname+"/views")
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
