@@ -1,0 +1,61 @@
+import express from "express";
+import bodyParser from "body-parser";
+import pg from "pg";
+
+const app = express();
+const port = 3000;
+const db = new pg.Client({
+  // uhdpp
+  user: "postgres",
+  host: "localhost",
+  database: "world",
+  password: "Munir@12",
+  port: 5432,
+});
+db.connect();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+app.get("/", async (req, res) => {
+  const query = await db.query("SELECT * FROM visited_countries");
+  let countries = [];
+
+  // looping through rows and sending the country code to countries array
+  query.rows.forEach(country => {
+    countries.push(country.country_code);
+  });
+
+  console.log(query.rows);
+  res.render("index.ejs", { countries: countries, total: countries.length });
+});
+
+// Adding new Country
+app.post("/add",async (req,res) =>{
+  const userInput = req.body["country"];
+  // result stores the country code (e.g, user inputs 'France' it wil be looked in countries table)
+  // if matched then it resturns the country_code of that country_name
+  const result = await db.query("SELECT country_code FROM countries WHERE country_name=$1",[userInput]);
+
+  // if data exists (more than 1 row)
+  if(result.rows.length !== 0){
+    // storing first row in data variable
+    const data = result.rows[0];
+    // setting the data country_code property to countryCode
+    const countryCode = data.country_code;
+
+    // this insert the new data into visited_countries (country code) like the user type France as country_name
+    // above then after extracting the country_code of that country it inserts that countryCode into
+    // visited_countries table
+
+    // ON CONFLICT DO NOTHING (if user enter duplicate country it just refreshes and not show error)
+    await db.query("INSERT INTO visited_countries(country_code) VALUES($1) ON CONFLICT DO NOTHING",
+    [countryCode]);
+    // after insertion redirect to homePage
+    res.redirect("/");
+  }
+});
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
