@@ -9,7 +9,7 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "world",
-  password: "123456",
+  password: "Munir@12",
   port: 5432,
 });
 db.connect();
@@ -56,27 +56,44 @@ app.post("/add", async (req, res) => {
   const input = req.body["country"];
   const currentUser = await getCurrentUser();
 
+  if (!input || input.trim() === "") {
+    return res.redirect("/"); // prevent empty input
+  }
+
   try {
     const result = await db.query(
       "SELECT country_code FROM countries WHERE LOWER(country_name) LIKE '%' || $1 || '%';",
       [input.toLowerCase()]
     );
 
-    const data = result.rows[0];
-    const countryCode = data.country_code;
-    try {
-      await db.query(
-        "INSERT INTO visited_countries (country_code, user_id) VALUES ($1, $2)",
-        [countryCode, currentUserId]
-      );
-      res.redirect("/");
-    } catch (err) {
-      console.log(err);
+    if (result.rows.length === 0) {
+      return res.redirect("/"); // invalid country
     }
+
+    const countryCode = result.rows[0].country_code;
+
+    // Check if already visited
+    const check = await db.query(
+      "SELECT * FROM visited_countries WHERE country_code = $1 AND user_id = $2;",
+      [countryCode, currentUserId]
+    );
+    if (check.rows.length > 0) {
+      return res.redirect("/"); // duplicate entry
+    }
+
+    // Insert if valid and not duplicate
+    await db.query(
+      "INSERT INTO visited_countries (country_code, user_id) VALUES ($1, $2);",
+      [countryCode, currentUserId]
+    );
+
+    res.redirect("/");
   } catch (err) {
     console.log(err);
+    res.redirect("/");
   }
 });
+
 
 app.post("/user", async (req, res) => {
   if (req.body.add === "new") {
