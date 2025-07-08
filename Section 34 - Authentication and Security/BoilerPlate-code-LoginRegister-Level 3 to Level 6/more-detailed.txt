@@ -1,0 +1,207 @@
+// auth-boilerplate.js
+import express from "express";
+import bodyParser from "body-parser";
+import pg from "pg";
+import bcrypt from "bcrypt";
+import session from "express-session";
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import GoogleStrategy from "passport-google-oauth2";
+import env from "dotenv";
+
+env.config();
+const app = express();
+const port = 3000;
+const saltRounds = 10;
+
+// Middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.set("view engine", "ejs");
+
+// Session Config
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 day
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// PostgreSQL DB Config
+const db = new pg.Client({
+  user: process.env.PG_USER,
+  host: process.env.PG_HOST,
+  database: process.env.PG_DATABASE,
+  password: process.env.PG_PASSWORD,
+  port: process.env.PG_PORT,
+});
+db.connect();
+
+// ------------------ Passport Local Strategy ------------------
+passport.use("local", new LocalStrategy(async (username, password, done) => {
+  try {
+    const result = await db.query("SELECT * FROM users WHERE email=$1", [username]);
+    if (result.rows.length === 0) return done(null, false);
+    const user = result.rows[0];
+    bcrypt.compare(password, user.password, (err, isMatch) => {
+      if (err) return done(err);
+      return isMatch ? done(null, user) : done(null, false);
+    });
+  } catch (error) {
+    return done(error);
+  }
+}));
+
+// ------------------ Passport Google Strategy ------------------
+passport.use("google", new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "http://localhost:3000/auth/google/callback", // 👈 Change per project
+  userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+}, async (accessToken, refreshToken, profile, done) => {
+  try {
+    const result = await db.query("SELECT * FROM users WHERE email=$1", [profile.email]);
+    if (result.rows.length === 0) {
+      const newUser = await db.query(
+        "INSERT INTO users(email, password) VALUES($1, $2) RETURNING *",
+        [profile.email, "google"]
+      );
+      return done(null, newUser.rows[0]);
+    }
+    return done(null, result.rows[0]);
+  } catch (error) {
+    return done(error);
+  }
+}));
+
+// Session serialization
+passport.serializeUser((user, done) => done(null, user.id));
+passport.deserializeUser(async (id, done) => {
+  try {
+    const result = await db.query("SELECT * FROM users WHERE id=$1", [id]);
+    done(null, result.rows[0]);
+  } catch (error) {
+    done(error);
+  }
+});
+
+// ------------------ Routes ------------------
+
+// Home Page (Public)
+app.get("/", (req, res) => res.render("home.ejs")); // Replace as needed
+
+// Register Page (Form UI)
+app.get("/register", (req, res) => res.render("register.ejs"));
+
+// Login Page (Form UI)
+app.get("/login", (req, res) => res.render("login.ejs"));
+
+// Registration Handler
+app.post("/register", async (req, res) => {
+  const email = req.body.username;
+  const password = req.body.password;
+
+  try {
+    const checkResult = await db.query("SELECT * FROM users WHERE email=$1", [email]);
+    if (checkResult.rows.length > 0) {
+      return res.send("Email already exists. Try logging in.");
+    }
+
+    bcrypt.hash(password, saltRounds, async (err, hash) => {
+      if (err) return res.status(500).send("Error hashing password");
+      const result = await db.query(
+        "INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *",
+        [email, hash]
+      );
+      const user = result.rows[0];
+      req.logIn(user, (err) => {
+        if (err) return res.redirect("/login");
+        return res.redirect("/dashboard"); // 🔁 Custom redirect after registration
+      });
+    });
+  } catch (err) {
+    res.status(500).send("Registration error");
+  }
+});
+
+// Login Handler
+app.post("/login", passport.authenticate("local", {
+  successRedirect: "/dashboard", // 🔁 Custom redirect after login
+  failureRedirect: "/login"
+}));
+
+// Logout
+app.get("/logout", (req, res, next) => {
+  req.logout(err => {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+});
+
+// Google OAuth Routes
+app.get("/auth/google", passport.authenticate("google", {
+  scope: ["profile", "email"]
+}));
+
+app.get("/auth/google/callback", passport.authenticate("google", {
+  successRedirect: "/dashboard", // 🔁 Custom redirect after Google login
+  failureRedirect: "/login"
+}));
+
+// Protected Dashboard
+app.get("/dashboard", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render("dashboard.ejs", { email: req.user.email }); // 🔁 Replace with your logic
+  } else {
+    res.redirect("/login");
+  }
+});
+
+app.listen(port, () => {
+  console.log(`✅ Auth boilerplate running on http://localhost:${port}`);
+});
+
+
+
+
+What's Included:
+Local auth using email/password
+Google OAuth2 login
+PostgreSQL integration
+Password hashing with bcrypt
+Session-based login system
+Commented sections for easy redirection and customization
+
+
+auth-boilerplate/
+├── views/
+│   ├── home.ejs
+│   ├── login.ejs
+│   ├── register.ejs
+│   └── dashboard.ejs
+├── public/
+│   └── (your static files like CSS/images)
+├── .env
+├── .env.example
+├── auth-boilerplate.js
+├── package.json
+
+
+
+.env file
+
+PG_USER=your_pg_user
+PG_HOST=localhost
+PG_DATABASE=your_db
+PG_PASSWORD=your_password
+PG_PORT=5432
+
+SESSION_SECRET=your_custom_session_secret
+
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+
+
