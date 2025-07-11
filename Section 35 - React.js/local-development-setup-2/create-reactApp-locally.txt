@@ -1,0 +1,85 @@
+🛠️ 1. Create the App
+npm create vite@latest my-react-app --template react
+
+my-react-app is your project folder name (you can name it anything)
+--template react sets up a React + JavaScript project
+👉 Use --template react-ts for React + TypeScript
+
+
+📂 2. Go Into the Project Folder
+cd my-react-app
+
+
+📦 3. Install the Dependencies
+npm install
+This installs React, ReactDOM, Vite, and other required packages.
+
+
+🚀 4. Start the Development Server
+npm run dev
+
+
+You’ll see a message like:
+
+VITE v5.x.x  ready in 100ms
+
+  ➜  Local: http://localhost:5173/
+
+Open that link in your browser to see your React app!
+
+
+
+
+
+🔍 Folder Structure (after setup)
+
+my-react-app/
+├─ node_modules/
+├─ public/
+│  └─ vite.svg
+├─ src/
+│  ├─ App.jsx         ← Main component
+│  ├─ main.jsx        ← Entry point
+│  └─ index.css       ← Optional CSS
+├─ .gitignore
+├─ index.html         ← Root HTML file with <div id="root">
+├─ package.json
+├─ vite.config.js     ← Vite config file
+└─ README.md
+
+
+
+
+✅ How to Render JSX in Vite
+🔗 index.html contains:
+<div id="root"></div>
+
+
+
+🔗 main.jsx (entry point) looks like this:
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+
+🔗 App.jsx (your component):
+function App() {
+  return <h1>Hello from React 19 + Vite!</h1>;
+}
+
+export default App;
+
+
+
+🧠 Notes:
+Vite uses main.jsx instead of index.js
+No need to run npx create-react-app ever again (Vite is faster!)
+HMR (Hot Module Reload) works automatically
+No need to manually link index.html – Vite handles it

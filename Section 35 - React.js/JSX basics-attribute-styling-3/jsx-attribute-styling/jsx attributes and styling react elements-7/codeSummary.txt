@@ -1,0 +1,88 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+
+// For Html Atttributes in JSX (list of attributes)
+// https://www.w3schools.com/tags/ref_standardattributes.asp
+
+// for random photos
+// https://picsum.photos/
+
+
+// js variables
+const imageSource = "https://picsum.photos/200";
+
+root.render(
+  <React.StrictMode>
+    <div>
+      {/* className is alternative to html class attribute bcz in jsx we use camelCase for attributes */}
+      <h1 className='heading'>React 19</h1>
+      {/* contentEditable allows to edit content */}
+      {/* spellCheck='false' is an html attribute in jsx camelCase syntax that disables the spelling check
+      if set it to false */}
+      <p contentEditable='true' className='editPara' spellCheck='false'>Edit Me</p>
+      {/* styling anchor tag */}
+      <a href="https://react.dev/" target='blank' className='reactLink'>Visit React Docs</a>
+      </div>
+
+      {/* we will target main div with id and childs with same className */}
+      <div id='imagesContainer'>
+        <img className='squareImage' src="https://www.spiceandcolour.com/wp-content/uploads/2020/06/receta-presentacion-biryani-de-pollo-01.jpg" alt="Biryani" />
+        <img className='squareImage' src="https://www.masala.tv/wp-content/uploads/2021/05/KARACHI-BEEF-BIRYANI-lazzat-scaled.jpg" alt="Biryani" />
+        <img className='squareImage' src="https://tildaricelive.s3.eu-central-1.amazonaws.com/wp-content/uploads/2021/09/23084702/9K8A9843-8-1260x1260.jpg" alt="Biryani" />
+      </div>
+
+      {/* Calling js variable inside img element as an source to image */}
+      <img src={imageSource} alt="Loreum ipsum" />
+
+      {/* turning an image into grayscale by appending query parameter from loreum intro url of img */}
+      <img src={`${imageSource}?grayscale`} alt="Loreum ipsum" />
+  </React.StrictMode>
+);
+
+
+
+styles.css
+.heading {
+    color: rebeccapurple;
+    /* 1rem = 16px(html root size) */
+    font-size: 1.5rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
+.editPara {
+    color: cornflowerblue;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 400;
+}
+
+.reactLink{
+    text-decoration: none;
+    color: red;
+    font-size: 1rem;
+}
+
+.reactLink:hover {
+    font-size: 0.8rem;
+    color: orangered;
+}
+
+#imagesContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.squareImage {
+    height: 100px;
+    width: 100px;
+}
+
+.squareImage:hover {
+    height: 150px;
+    width: 150px;
+}

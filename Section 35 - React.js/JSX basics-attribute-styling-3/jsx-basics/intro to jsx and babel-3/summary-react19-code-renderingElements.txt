@@ -1,0 +1,28 @@
+// importing core react library
+import React from "react";
+
+// Import the new root API from React 18+ (works in React 19)
+import ReactDOM from "react-dom/client";
+
+// Get the root div from index.html (must have id="root")
+const rootElement = document.getElementById("root");
+
+// Create a React root from that DOM element
+const root = ReactDOM.createRoot(rootElement);
+
+// // rendering the h1 tag (single Element)
+// root.render(<h1>Hello React 19+</h1>);
+
+// rendering multiple element with the help of single div element that act
+// as parent of those child element that we will display
+// root.render(
+//   <div>
+//     <h1>Welcome to React 19+</h1>
+//     <p>
+//       React lets you build user interfaces out of individual pieces called
+//       components. Create your own React components like Thumbnail, LikeButton,
+//       and Video.
+//     </p>
+//     <button>Subscribe</button>
+//   </div>
+// );

@@ -1,0 +1,29 @@
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
+
+// For Html Atttributes in JSX (list of attributes)
+// https://www.w3schools.com/tags/ref_standardattributes.asp
+
+// js variables
+const customStyle = {
+  // all properties should be in camelCase while using jsx
+  // all properties should contain the key as string
+  color: 'blue',
+  fontSize:'1.5rem',
+  fontWeight:'300'
+};
+
+// updating css property that was in object using . notation to access object property
+customStyle.color = 'green';
+
+root.render(
+  <React.StrictMode>
+    <div>
+      {/* calling customStyle */}
+      <h1 style={customStyle}>React 19+</h1>
+    </div>
+  </React.StrictMode>
+);

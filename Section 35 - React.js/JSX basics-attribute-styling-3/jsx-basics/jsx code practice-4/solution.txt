@@ -1,0 +1,29 @@
+// CHALLENGE - 1
+
+//Create a react app from scratch.
+//It should display a h1 heading.
+//It should display an unordered list (bullet points).
+//It should contain 3 list elements.
+
+// importing essential modules
+import React from "react";
+import ReactDOM from "react-dom/client";
+
+// obtaining root element from index.html
+const rootElement = document.getElementById("root");
+
+// creating react root element
+const root = ReactDOM.createRoot(rootElement);
+
+// rendering elements inside root with help of parent div that holds
+// h1,ul and li
+root.render(
+  <div>
+    <h1>My Favourite Foods</h1>
+    <ul>
+      <li>Biryani</li>
+      <li>Paye</li>
+      <li>Chicken</li>
+    </ul>
+  </div>
+);
