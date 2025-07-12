@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: rgb(235, 231, 231);
+}
+
+
+#root {                    /* or .App if you wrap everything in a div.App */
+    min-height: 100%;      /* 100 % of viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.Header {
+    /* border: 2px solid black; */
+    padding: 20px 20px;
+    background-color: orange;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.Header > h1 {
+    font-size: 2rem;
+    color: white;
+    font-family: fantasy;
+    font-weight: 200;
+}
+
+.Notes {
+    border-radius: 10px;
+    padding: 25px 10px;
+    width: 20%;
+    background-color: rgb(255, 255, 255);
+    margin: 20px 15px;
+    /* Never go below 200px */
+    min-width: 200px;
+    /* Never go above 300px */
+    max-width: 300px; /* Optional but good for consistent layout */
+    box-shadow: 0 2px 5px #ccc;
+}
+
+
+.Footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;             /* stretch full width */
+    text-align: center;
+    padding: 1rem 0;
+    background: orange;        /* give it a solid background */
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 10;             /* optional: keep above other elements */
+}
+
+.Footer > p {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+
+/* By GPT */
+/* Small screens: stack cards full‑width and shrink heading */
+@media (max-width: 600px) {
+  .Header {
+    padding: 12px 16px;
+  }
+  .Header > h1 {
+    font-size: 1.5rem;
+  }
+
+  .Notes {
+    width: 90%;          /* fluid, no forced min/max */
+    min-width: 0;
+    max-width: none;
+    margin: 12px auto;   /* center the single-column cards */
+  }
+
+  /* Prevent content under the fixed footer */
+  body {
+    padding-bottom: 72px; /* ≈ footer height */
+  }
+}
