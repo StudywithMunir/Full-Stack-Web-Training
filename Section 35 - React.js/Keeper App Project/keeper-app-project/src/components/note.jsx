@@ -6,11 +6,14 @@ const paraStyle = {
     fontWeight: 'bold',
 };
 
-function Note(){
-    return <div className='Notes'>
-        <p style={paraStyle}>This is the Note Title</p>
-        <p>This is note content</p>
-    </div>;
+// destructing title, content so when the Note component called values will be rendered
+function Note({title, content}) {
+    return (
+        <div className='Notes'>
+            <p style={paraStyle}>{title}</p>
+            <p>{content}</p>
+        </div>
+    );
 }
 
 export default Note;
