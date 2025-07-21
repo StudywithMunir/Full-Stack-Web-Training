@@ -1,0 +1,2 @@
+https://www.w3schools.com/tags/ref_eventattributes.asp
+https://react.dev/reference/react-dom/components/common#mouseevent-handler

@@ -1,19 +1,19 @@
-import React from 'react'
+import React from "react";
 
-const paraStyle = {
-    fontSize: '1rem',
-    fontFamily: 'Arial',
-    fontWeight: 'bold',
-};
+function Note(props) {
 
-// destructing title, content so when the Note component called values will be rendered
-function Note({title, content}) {
-    return (
-        <div className='Notes'>
-            <p style={paraStyle}>{title}</p>
-            <p>{content}</p>
-        </div>
-    );
+  function handleClick() {
+    props.onDelete(props.id);  
+  }
+
+
+  return (
+    <div className="note">
+      <h1>{props.title}</h1>
+      <p>{props.content}</p>
+      <button onClick={handleClick}>DELETE</button>
+    </div>
+  );
 }
 
 export default Note;
