@@ -1,0 +1,5 @@
+1: CRUD
+https://www.mongodb.com/docs/manual/crud/
+
+2: Operators
+https://www.mongodb.com/docs/manual/reference/operator/query/
