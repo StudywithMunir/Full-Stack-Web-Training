@@ -3,3 +3,6 @@ https://www.mongodb.com/docs/manual/crud/
 
 2: Operators
 https://www.mongodb.com/docs/manual/reference/operator/query/
+
+3: Mongoose Data validations
+https://mongoosejs.com/docs/validation.html
